@@ -4,18 +4,18 @@ from setuptools import setup,find_packages
 
 METADATA = dict(
     name='django-userpreferences',
-    version='0.1',
+    version='0.1.1',
     author='Nicolas Patry',
     author_email='nicolas.patry@centraliens.net',
 
     description="""Django application that allows you to easily store
     preferences for your users to choose from. Sending emails but want to let
-    the user choose the frequency ? Do it by adding a preferences.py file in
+    the user choose the frequency? Do it by adding a preferences.py file in
     your email app.""",
     long_description=open('README.rst').read(),
 
-    url='http://github.com/Narsil/django-userpreferences',
-    download_url='http://github.com/Narsil/django-userpreferences/downloads/',
+    url='http://github.com/fiee/django-userpreferences',
+    download_url='http://github.com/fiee/django-userpreferences/downloads/',
 
     include_package_data = True,
 
