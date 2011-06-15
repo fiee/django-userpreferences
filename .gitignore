@@ -1,6 +1,13 @@
-# temporary python files
+# compiled python files
 *.pyc
+*.pyo
 
 # temporary files from vim
 *.swp
 
+# Apple cruft
+.DS_Store
+
+# Eclipse stuff
+.project
+.pydevproject
