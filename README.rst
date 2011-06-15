@@ -1,6 +1,6 @@
-=====================================
+===============================================
 django-userpreferences (django-userpreferences)
-=====================================
+===============================================
 
 This `Django <https://www.djangoproject.com/>`_ app has for purpose to integrate easily for other apps to use.
 It aims to be easily added into existing projects.
@@ -8,8 +8,8 @@ It aims to be easily added into existing projects.
 Installation 
 ============
 
-Depedencies  
-~~~~~~~~~~~
+Dependencies  
+~~~~~~~~~~~~
 
 django-userpreferences requires `django-picklefield <https://github.com/shrubberysoft/django-picklefield>`_.
 When upgrading you need `south <http://south.aeracode.org/>`_.
@@ -49,7 +49,7 @@ And if you are using south (you need south if you are upgrading)::
 Using django-userpreferences
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Add a *preferences.py* file to you app *test_app*.::
+Add a *preferences.py* file to your app *test_app*.::
 
     test_app/
      -- preferences.py
@@ -58,18 +58,18 @@ Add a *preferences.py* file to you app *test_app*.::
 
 That looks like this::
 
-    PREFRENCES = (
+    PREFERENCES = (
         'mailing_period':(
             #(u'Preference Display', 'value')
-            (u'Weekly', 'week'), #first item is the default value
+            (u'Weekly', 'week'), # first item is the default value
             (u'Monthly', 'month'),
             (u'Daily', 'day'),
         )
     )
 
-You can now access user preference within your views
-Using the `get` method differs from accessing directly the dict because it will return saved values 
-AND defaults if the database lacks them. You can always access directly the dict `user.preferences.preferences`::
+You can now access user preferences within your views.
+Using the `get` method differs from accessing the dict directly, in that it will return saved values 
+AND defaults if the database lacks them. You can always directly access the dict `user.preferences.preferences`::
 
     >>> user.preferences.get('test_app')
     {'mailing_period' : 'week'}
@@ -85,20 +85,20 @@ If you use the preferences urls, an url is made accessible to change preferences
         
 If the value in the database does not match any of the preferences within your 
 preferences.py, the default value will be returned (this allows to disable 
-preferences after people actually used them without breaking your app)
+preferences after people actually used them, without breaking your app).
 
 String settings work nice, I did not try other things such as datetime yet, 
-hopefully they work nice (as the settings are stored in a picklefield).
+hopefully they just work (as the settings are stored in a picklefield).
 
-Only discrete set of settings are allowed for now. Patches welcome for 
-preferences that could set by user input.
+Only discrete sets of settings are allowed for now.
+Patches are welcome for preferences that accept user input.
 
 Changing the default separator 
-~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
  
-djatngo-userpreferences uses a separator between the app name and the
-preference name in forms. By default the separator is '/'. To override this
+django-userpreferences uses a separator between app name and
+preference name in forms. By default the separator is '/'. To override this,
 in the weird case you might be needing it in some variable name, you need
-to change it in you settings.py file::
+to change it in your settings.py file::
 
     PREFERENCES_SEPARATOR = '/'
