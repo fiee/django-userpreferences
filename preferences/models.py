@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth import models as auth_models
+from django.utils.translation import ugettext as _
 from picklefield.fields import PickledObjectField
 import fields
 
@@ -16,9 +17,14 @@ for app in settings.INSTALLED_APPS:
 class UserPreferences(models.Model):
     user = fields.AutoOneToOneField(
             auth_models.User,
+            verbose_name=_(u'User'),
             related_name='preferences',
             null=True)
-    preferences = PickledObjectField(default={})
+    preferences = PickledObjectField(verbose_name=_(u'Preferences'), default={})
+
+    class Meta(object):
+        verbose_name=_(u'User Preferences')
+        verbose_name_plural=_(u'User Preferences')
 
     def get(self,app_label):
         app_prefs = PREFERENCES.get(app_label)
