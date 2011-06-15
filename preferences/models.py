@@ -26,6 +26,9 @@ class UserPreferences(models.Model):
         verbose_name=_(u'User Preferences')
         verbose_name_plural=_(u'User Preferences')
 
+    def __unicode__(self):
+        return _(u'Preferences for user %s') % self.user.username
+
     def get(self,app_label):
         app_prefs = PREFERENCES.get(app_label)
         prefs={}
