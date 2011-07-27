@@ -13,6 +13,7 @@ from django.core.urlresolvers import reverse
 
 class PreferencesTest(TestCase):
     def setUp(self):
+        self.OLD_PREFERENCES = models.PREFERENCES
         self.u = User.objects.create_user('testuser', 'test@example.com', 'testpw')
         models.PREFERENCES={
                 'test_app': {
@@ -28,6 +29,9 @@ class PreferencesTest(TestCase):
                 'pref_test':'default_value',
                 'pref_test2':'default_value2',
                 }
+
+    def tearDown(self):
+        models.PREFERENCES= self.OLD_PREFERENCES
 
 class PreferencesAPITest(PreferencesTest):
     def test_get_default_if_none(self):
@@ -55,6 +59,14 @@ class PreferencesAPITest(PreferencesTest):
                 {'pref_test':'different_value',
                     'pref_test2':'default_value2'})
 
+
+    def test_change_through_dict_api(self):
+        self.u.preferences['test_app']={'pref_test':'different_value'}
+        self.u.preferences.save()
+        test_settings=self.u.preferences['test_app']
+        self.assertEqual(test_settings,
+                {'pref_test':'different_value',
+                    'pref_test2':'default_value2'})
 
 class PreferencesUrlTest(PreferencesTest):
     def test_change_through_url(self):
