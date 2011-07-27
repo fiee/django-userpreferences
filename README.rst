@@ -68,16 +68,17 @@ That looks like this::
     )
 
 You can now access user preferences within your views.
-Using the `get` method differs from accessing the dict directly, in that it will return saved values 
-AND defaults if the database lacks them. You can always directly access the dict `user.preferences.preferences`::
 
-    >>> user.preferences.get('test_app')
+    >>> user.preferences['test_app']
     {'mailing_period' : 'week'}
 
-    >>> user.preferences.preferences['test_app'] = { 'mailing_period' : 'month' }
+    >>> user.preferences['test_app'] = { 'mailing_period' : 'month' }
     >>> user.preferences.save()
-    >>> user.preferences.get('test_app')
+    >>> user.preferences['test_app']
     {'mailing_period' : 'month'}
+
+Note: Though it may have some properties of a dict, `user.preferences` is NOT a dict.
+It's a Model object, dict behaviour is a shortcut for `user.preferences.preferences`.
 
 If you use the preferences urls, an url is made accessible to change preferences::
 
