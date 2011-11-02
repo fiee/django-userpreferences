@@ -2,8 +2,10 @@
 django-userpreferences (django-userpreferences)
 ===============================================
 
-This `Django <https://www.djangoproject.com/>`_ app has for purpose to integrate easily for other apps to use.
-It aims to be easily added into existing projects.
+Save arbitrary settings per user.
+
+This pluggable Django_ app should integrate easily with other apps, also in existing projects.
+
 
 Installation 
 ============
@@ -11,8 +13,10 @@ Installation
 Dependencies  
 ~~~~~~~~~~~~
 
-django-userpreferences requires `django-picklefield <https://github.com/shrubberysoft/django-picklefield>`_.
-When upgrading you need `south <http://south.aeracode.org/>`_.
+django-userpreferences requires django-picklefield_.
+
+We suggest South_ to simplify upgrading.
+
 
 Installing django-userpreferences
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
@@ -40,16 +44,17 @@ Don't forget to run ::
 
     ./manage.py syncdb
 
-to create the table that is going to receive the preferences.
+to create the preferences table.
 
-And if you are using south (you need south if you are upgrading)::
+And if you are using South_ (you need south if you are upgrading)::
 
    ./manage.py migrate
+
 
 Using django-userpreferences
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Add a *preferences.py* file to your app *test_app*.::
+Add a *preferences.py* file to your app *test_app*::
 
     test_app/
      -- preferences.py
@@ -77,19 +82,19 @@ You can now access user preferences within your views.
     >>> user.preferences['test_app']
     {'mailing_period' : 'month'}
 
-Note: Though it may have some properties of a dict, `user.preferences` is NOT a dict.
-It's a Model object, dict behaviour is a shortcut for `user.preferences.preferences`.
+Note: Though it may have some properties of a dict, ``user.preferences`` is **not** a dict.
+It's a Model object; dict behaviour is a shortcut for ``user.preferences.preferences``.
 
-If you use the preferences urls, an url is made accessible to change preferences::
+If you use the preferences urls, there’s an url to change preferences::
 
     <a href="{% url preferences.views.change 'test_app' 'mailing_period' 'month' %}?return_url='/'>Receive monthly newsletter</a>
         
-If the value in the database does not match any of the preferences within your 
-preferences.py, the default value will be returned (this allows to disable 
+If the value in the database does not match any of the preferences in your 
+``preferences.py``, the default value will be returned (this allows to disable 
 preferences after people actually used them, without breaking your app).
 
-String settings work nice, I did not try other things such as datetime yet, 
-hopefully they just work (as the settings are stored in a picklefield).
+Since we use pickle_ serialization, you can use only pickle-able settings.
+These include strings, integers, floats, booleans, tuples, lists, sets.
 
 Only discrete sets of settings are allowed for now.
 Patches are welcome for preferences that accept user input.
@@ -103,3 +108,25 @@ in the weird case you might be needing it in some variable name, you need
 to change it in your settings.py file::
 
     PREFERENCES_SEPARATOR = '/'
+
+Authors and License
+===================
+
+Authors
+~~~~~~~
+
+* Nicolas Patry, <nicolas.patry@centraliens.net> (main author)
+* Henning Hraban Ramm, <hraban@fiee.net> (i18n, fixes)
+
+License
+~~~~~~~
+
+GNU Lesser/Library Public License (LGPL)
+
+django-picklefield_ is MIT-licensed. South_ is Apache-licensed. Django_ itself is BSD-licensed. Discuss.
+
+
+.. _Django: https://www.djangoproject.com/
+.. _django-picklefield: https://github.com/shrubberysoft/django-picklefield
+.. _South: http://south.aeracode.org
+.. _pickle: http://docs.python.org/library/pickle.html
