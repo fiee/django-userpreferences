@@ -1,11 +1,11 @@
 from django.shortcuts import render_to_response
 from django.template import RequestContext
-from models import PREFERENCES
+#from models import PREFERENCES
 from django.contrib.auth.decorators import login_required
 import os
 import django.views.static
 import app_settings
-from django.http import Http404,HttpResponseRedirect
+from django.http import HttpResponseRedirect # Http404
 #from django.core.urlresolvers import reverse
 
 @login_required
@@ -22,7 +22,7 @@ def index(request):
             preferences=request.user.preferences.all()
             if preferences[app][pref][0][1] != value:
                 user_preferences = request.user.preferences.preferences
-                app_pref = user_preferences.get(app)
+                #app_pref = user_preferences.get(app)
                 if not user_preferences.has_key(app):
                     user_preferences[app]={}
                 if not user_preferences[app].has_key(pref):
@@ -42,7 +42,7 @@ def media(request, path):
     """
     Serve media file directly.
     Useful only for django pre 1.3 which does not use
-    django.collectstatict
+    django.collectstatic
     """
     parent = os.path.abspath(os.path.dirname(__file__))
     root = os.path.join(parent, 'media')
