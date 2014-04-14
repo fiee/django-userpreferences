@@ -5,6 +5,9 @@ from picklefield.fields import PickledObjectField
 import fields
 
 from django.conf import settings
+from preferences import app_settings
+
+
 PREFERENCES={}
 for app in settings.INSTALLED_APPS:
     try:
@@ -47,11 +50,14 @@ class UserPreferences(models.Model):
         user_prefs = self.preferences.get(app_label)
         if user_prefs:
             for key in user_prefs:
-                #If settings not in available values don't change default
-                # if user settings contain old preferences
                 if app_prefs.has_key(key):
-                    if user_prefs[key] in map(lambda x:x[1],app_prefs.get(key)):
-                        prefs[key]=user_prefs[key]
+                    #If settings not in available values don't change default
+                    # if user settings contain old preferences
+                    if app_settings.STRICT_CHOICES:
+                        if user_prefs[key] in map(lambda x:x[1],app_prefs.get(key)):
+                            prefs[key]=user_prefs[key]
+                    else:
+                        prefs[key] = user_prefs[key]
         return prefs
 
     def all(self):
@@ -64,6 +70,7 @@ class UserPreferences(models.Model):
             for pref,user_value in user_prefs.items():
                 if preferences[app_label].has_key(pref):
                     #Happens if old info is left in user settings
+                    # FIXME: Consider app_settings.STRICT_CHOICES == False here
                     possibilities = list(preferences[app_label][pref])
                     for index,item in enumerate(possibilities):
                         if item[1] == user_value:
