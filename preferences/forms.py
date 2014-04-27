@@ -4,7 +4,22 @@ from .models import PREFERENCES
 
 
 class BasePreferencesForm(forms.Form):
-    pass
+    def update_preferences(self, user):
+        """
+        Update `user' preferences from form's (clean) data.
+        'update_<field>' methods are looked up and called if found to process values.
+        """
+        preferences = user.preferences.preferences
+        if not preferences.has_key(self.app):
+            user.preferences.preferences[self.app] = {}
+        for key, value in self.cleaned_data.iteritems():
+            if key in self.exclude_from_preferences:
+                continue
+            if hasattr(self, 'update_%s' % key):
+                value = getattr(self, 'update_%s' % key)(value)
+            user.preferences.preferences[self.app][key] = value
+        user.preferences.save()
+
 
 def preferences_form_factory(app, form=BasePreferencesForm, fields=None, exclude=None,
                              formfield_callback=None, widgets=None):
