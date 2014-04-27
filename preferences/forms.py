@@ -29,7 +29,9 @@ def preferences_form_factory(app, form=BasePreferencesForm, fields=None, exclude
 
     # Class attributes for the new form class.
     form_class_attrs = {
+        'app': app,
         'Meta': Meta,
+        'exclude_from_preferences': [],
         'formfield_callback': formfield_callback
     }
     # Add ChoiceFields for each preference in the app
