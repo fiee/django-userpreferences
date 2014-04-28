@@ -12,12 +12,20 @@ class BasePreferencesForm(forms.Form):
         preferences = user.preferences.preferences
         if not preferences.has_key(self.app):
             user.preferences.preferences[self.app] = {}
+
         for key, value in self.cleaned_data.iteritems():
             if key in self.exclude_from_preferences:
                 continue
             if hasattr(self, 'update_%s' % key):
                 value = getattr(self, 'update_%s' % key)(value)
             user.preferences.preferences[self.app][key] = value
+
+        # Go through preferences not in cleaned_data and try calling its update_<preference> method
+        for pref in [k for k in preferences.keys() if k not in self.cleaned_data.keys]:
+            if hasattr(self, 'update_%s' % key):
+                value = getattr(self, 'update_%s' % key)(value)
+                user.preferences.preferences[self.app][key] = value
+
         user.preferences.save()
 
 
