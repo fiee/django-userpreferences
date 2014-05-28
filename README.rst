@@ -117,7 +117,6 @@ Authors
 
 * Nicolas Patry, <nicolas.patry@centraliens.net> (main author)
 * Henning Hraban Ramm, <hraban@fiee.net> (i18n, fixes)
-* Gonzalo Delgado, <mail@gonzalodelgado.com.ar> (form)
 
 License
 ~~~~~~~
