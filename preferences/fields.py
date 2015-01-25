@@ -1,6 +1,6 @@
 from django.db import models
 from django.db.models import OneToOneField
-from django.utils import simplejson as json
+import simplejson as json
 from django.core.serializers.json import DjangoJSONEncoder
 from django.db.models.fields.related import SingleRelatedObjectDescriptor
 
