@@ -1,5 +1,5 @@
 #!/usr/bin/env python
-from setuptools import setup,find_packages
+from setuptools import setup, find_packages
 
 
 METADATA = dict(
@@ -17,12 +17,12 @@ METADATA = dict(
     url='http://github.com/Narsil/django-userpreferences',
     download_url='http://github.com/Narsil/django-userpreferences/downloads/',
 
-    include_package_data = True,
+    include_package_data=True,
 
     keywords='django preferences user settings profile',
 
-    install_requires=['django_picklefield>=0.1.9',],
-    packages = find_packages(),
+    install_requires=['django>=1.7', 'django_picklefield>=0.1.9', ],
+    packages=find_packages(),
 
     classifiers=[
         'Development Status :: 4 - Beta',
@@ -39,5 +39,4 @@ License (LGPL)',
 )
 
 if __name__ == '__main__':
-    setup(**METADATA)
-
+    setup(requires=['django'], **METADATA)

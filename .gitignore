@@ -1,6 +1,15 @@
+# module files
+*.egg
+*.egg-info/
+
 # temporary python files
 *.pyc
 
 # temporary files from vim
 *.swp
 
+# IntellJ-specific files
+.idea/
+build/
+*.iml
+atlassian-ide-plugin.xml
