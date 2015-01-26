@@ -32,15 +32,16 @@ def index(request):
                 request.user.preferences.save()
     preferences=request.user.preferences.all()
     # TODO if django version is older
-    STATIC_URL = reverse('preferences.views.media', args=[''])
+    static_url = reverse('preferences.views.media', args=[''])
     extra = {
             'preferences': preferences,
-            'STATIC_URL': STATIC_URL,
+            'STATIC_URL': static_url,
             "SEPARATOR": app_settings.SEPARATOR}
     return render_to_response(
             'preferences.html',
             extra,
             context_instance=RequestContext(request))
+
 
 def media(request, path):
     """
