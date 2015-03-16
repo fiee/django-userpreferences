@@ -8,10 +8,14 @@ from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
 
 import app_settings
+from django.http.response import HttpResponse
 
 
 @login_required
 def index(request):
+    if not app_settings.INDEX_VIEW_ENABLED:
+        return HttpResponse()
+
     if request.method == "POST":
         post = request.POST
         for key, value in post.items():

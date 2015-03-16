@@ -1,9 +1,11 @@
-from django.db import models
+from django.conf import settings
 from django.contrib.auth import models as auth_models
+from django.db import models
 from picklefield.fields import PickledObjectField
+from preferences import app_settings
+
 import fields
 
-from django.conf import settings
 
 PREFERENCES = {}
 
@@ -18,7 +20,7 @@ for app in settings.INSTALLED_APPS:
 
 class UserPreferences(models.Model):
     user = fields.AutoOneToOneField(
-        auth_models.User,
+        app_settings.User,
         related_name='preferences',
         null=True)
     preferences = PickledObjectField(default={})
