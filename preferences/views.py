@@ -1,8 +1,7 @@
 import os
 
 from django.contrib.auth.decorators import login_required
-from django.shortcuts import render_to_response
-from django.template import RequestContext
+from django.shortcuts import render
 import django.views.static
 # import app_settings
 from django.http import HttpResponseRedirect
@@ -42,10 +41,7 @@ def index(request):
             'preferences': preferences,
             'STATIC_URL': static_url,
             "SEPARATOR": app_settings.SEPARATOR}
-    return render_to_response(
-            'preferences.html',
-            extra,
-            context_instance=RequestContext(request))
+    return render(request, 'preferences.html', extra)
 
 
 def media(request, path):
