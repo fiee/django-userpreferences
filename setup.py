@@ -1,10 +1,10 @@
 #!/usr/bin/env python
-from setuptools import setup,find_packages
+from setuptools import setup, find_packages
 
 
 METADATA = dict(
     name='django-userpreferences',
-    version='0.1.1',
+    version='0.1.2',
     author='Nicolas Patry',
     author_email='nicolas.patry@centraliens.net',
 
@@ -17,12 +17,12 @@ METADATA = dict(
     url='http://github.com/fiee/django-userpreferences',
     download_url='http://github.com/fiee/django-userpreferences/downloads/',
 
-    include_package_data = True,
+    include_package_data=True,
 
     keywords='django preferences user settings profile',
 
-    install_requires=['django_picklefield>=0.1.9',],
-    packages = find_packages(),
+    install_requires=['django_picklefield>=0.1.9', ],
+    packages=find_packages(),
 
     classifiers=[
         'Development Status :: 4 - Beta',
