@@ -5,7 +5,7 @@ from setuptools import setup, find_packages
 METADATA = dict(
     name='django-userpreferences',
     version='0.1.2',
-    author='Nicolas Patry',
+    author='Nicolas Patry et al.',
     author_email='nicolas.patry@centraliens.net',
 
     description="""Django application that allows you to easily store
@@ -21,7 +21,7 @@ METADATA = dict(
 
     keywords='django preferences user settings profile',
 
-    install_requires=['django_picklefield>=0.1.9', ],
+    install_requires=['django>=1.7', 'django_picklefield>=0.1.9', ],
     packages=find_packages(),
 
     classifiers=[
@@ -39,5 +39,4 @@ License (LGPL)',
 )
 
 if __name__ == '__main__':
-    setup(**METADATA)
-
+    setup(requires=['django'], **METADATA)

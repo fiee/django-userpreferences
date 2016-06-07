@@ -1,4 +1,5 @@
 import os
+from django.core.wsgi import get_wsgi_application
 
 BASE_DIR = os.path.dirname(__file__)
 
@@ -22,3 +23,8 @@ MIDDLEWARE_CLASSES = (
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.contrib.auth.middleware.AuthenticationMiddleware',
 )
+
+SECRET_KEY = 'testsecretkey'
+
+os.environ['DJANGO_SETTINGS_MODULE'] = 'test_settings'
+application = get_wsgi_application()

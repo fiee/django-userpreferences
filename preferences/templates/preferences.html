@@ -13,7 +13,7 @@
             {% for pref,values in prefs.items %}
             <li class="row"> 
                 {{ pref }} 
-                <select name="{{app}}{{ SEPARATOR }}{{pref}}">
+                <select name="{{ app }}{{ SEPARATOR }}{{ pref }}">
                     {% for val in values %}
                     <option value="{{ val.1 }}" > {{ val.0 }} </option>
                     {% endfor %}
@@ -23,6 +23,6 @@
         </ul>
 {% endfor %}
     </div>
-    <input type="submit" value="Enregistrer" />
+    <input type="submit" value="Save" />
 </form>
 {% endblock %}

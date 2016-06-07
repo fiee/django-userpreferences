@@ -1,5 +1,4 @@
 from django import forms
-
 from .models import PREFERENCES
 
 
@@ -10,7 +9,7 @@ class BasePreferencesForm(forms.Form):
         'update_<field>' methods are looked up and called if found to process values.
         """
         preferences = user.preferences.preferences
-        if not preferences.has_key(self.app):
+        if self.app not in preferences:
             user.preferences.preferences[self.app] = {}
 
         for key, value in self.cleaned_data.iteritems():
@@ -21,7 +20,7 @@ class BasePreferencesForm(forms.Form):
             user.preferences.preferences[self.app][key] = value
 
         # Go through preferences not in cleaned_data and try calling its update_<preference> method
-        for pref in [k for k in preferences.keys() if k not in self.cleaned_data.keys]:
+        for key in [k for k in preferences.keys() if k not in self.cleaned_data.keys]:
             if hasattr(self, 'update_%s' % key):
                 value = getattr(self, 'update_%s' % key)(value)
                 user.preferences.preferences[self.app][key] = value

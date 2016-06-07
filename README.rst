@@ -13,9 +13,8 @@ Installation
 Dependencies  
 ~~~~~~~~~~~~
 
-django-userpreferences requires django-picklefield_.
-
-We suggest South_ to simplify upgrading.
+* Django_ (of course)
+* django-picklefield_
 
 
 Installing django-userpreferences
@@ -25,6 +24,8 @@ Install into your python path using pip or easy_install::
 
     pip install django-userpreferences
     easy_install django-userpreferences
+
+(Beware, this fork is only installable from github!)
 
 Add *'preferences'* to your INSTALLED_APPS in settings.py::
 
@@ -42,13 +43,10 @@ Add *'(r'^preferences/', include('preferences.urls')'* to your urls::
 
 Don't forget to run ::
 
-    ./manage.py syncdb
+    ./manage.py makemigrations preferences
+    ./manage.py migrate
 
 to create the preferences table.
-
-And if you are using South_ (you need south if you are upgrading)::
-
-   ./manage.py migrate
 
 
 Using django-userpreferences
@@ -65,14 +63,14 @@ That looks like this::
 
     PREFERENCES = (
         'mailing_period':(
-            #(u'Preference Display', 'value')
-            (u'Weekly', 'week'), # first item is the default value
+            # (u'Preference Display', 'value')
+            (u'Weekly', 'week'),  # first item is the default value
             (u'Monthly', 'month'),
             (u'Daily', 'day'),
         )
     )
 
-You can now access user preferences within your views.
+You can now access user preferences within your views::
 
     >>> user.preferences['test_app']
     {'mailing_period' : 'week'}
@@ -118,16 +116,16 @@ Authors
 * Nicolas Patry, <nicolas.patry@centraliens.net> (main author)
 * Henning Hraban Ramm, <hraban@fiee.net> (i18n, fixes)
 * Gonzalo Delgado, <mail@gonzalodelgado.com.ar> (form)
+* Andrei Kuziakov (adaption to Django 1.7, tests,  migration)
 
 License
 ~~~~~~~
 
 GNU Lesser/Library Public License (LGPL)
 
-django-picklefield_ is MIT-licensed. South_ is Apache-licensed. Django_ itself is BSD-licensed. Discuss.
+django-picklefield_ is MIT-licensed. Django_ itself is BSD-licensed. Discuss.
 
 
 .. _Django: https://www.djangoproject.com/
 .. _django-picklefield: https://github.com/shrubberysoft/django-picklefield
-.. _South: http://south.aeracode.org
 .. _pickle: http://docs.python.org/library/pickle.html

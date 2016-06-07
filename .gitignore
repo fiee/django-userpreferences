@@ -1,3 +1,7 @@
+# module files
+*.egg
+*.egg-info/
+
 # compiled python files
 *.pyc
 *.pyo
@@ -11,3 +15,9 @@
 # Eclipse stuff
 .project
 .pydevproject
+
+# IntellJ-specific files
+.idea/
+build/
+*.iml
+atlassian-ide-plugin.xml
