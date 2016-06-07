@@ -113,7 +113,7 @@ Authors and License
 Authors
 ~~~~~~~
 
-* Nicolas Patry, <nicolas.patry@centraliens.net> (main author)
+* Nicolas Patry, <nicolas.patry@centraliens.net> (first author)
 * Henning Hraban Ramm, <hraban@fiee.net> (i18n, fixes)
 * Gonzalo Delgado, <mail@gonzalodelgado.com.ar> (form)
 * Andrei Kuziakov (adaption to Django 1.7, tests,  migration)
