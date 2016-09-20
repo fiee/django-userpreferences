@@ -2,6 +2,7 @@ from django.db.models import OneToOneField
 from django.db.models.fields.related_descriptors import ReverseOneToOneDescriptor
 # before Django 1.8 this was SingleRelatedObjectDescriptor from ...fields.related
 
+
 class AutoSingleRelatedObjectDescriptor(ReverseOneToOneDescriptor):
     def __get__(self, instance, instance_type=None):
         try:

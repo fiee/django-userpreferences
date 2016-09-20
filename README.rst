@@ -36,10 +36,10 @@ Add *'preferences'* to your INSTALLED_APPS in settings.py::
 
 Add *'(r'^preferences/', include('preferences.urls')'* to your urls:: 
 
-    urlpatterns = patterns( '',
+    urlpatterns = [
         ....
-        (r'^preferences/', include('preferences.urls'),
-    )
+        url(r'^preferences/', include('preferences.urls'),
+    ]
 
 Don't forget to run ::
 

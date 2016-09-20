@@ -6,7 +6,8 @@ class BasePreferencesForm(forms.Form):
     def update_preferences(self, user):
         """
         Update `user' preferences from form's (clean) data.
-        'update_<field>' methods are looked up and called if found to process values.
+        'update_<field>' methods are looked up and called if found
+        to process values.
         """
         preferences = user.preferences.preferences
         if self.app not in preferences:
@@ -28,8 +29,10 @@ class BasePreferencesForm(forms.Form):
         user.preferences.save()
 
 
-def preferences_form_factory(app, form=BasePreferencesForm, fields=None, exclude=None,
-                             formfield_callback=None, widgets=None):
+def preferences_form_factory(
+        app, form=BasePreferencesForm,
+        fields=None, exclude=None,
+        formfield_callback=None, widgets=None):
     preferences = PREFERENCES[app]
     attrs = {}
     if fields is not None:

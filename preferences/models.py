@@ -1,10 +1,12 @@
+from __future__ import absolute_import
 from django.conf import settings
 from django.contrib.auth import models as auth_models
 from django.utils.translation import ugettext as _
+from django.utils.encoding import python_2_unicode_compatible
 from django.db import models
 from picklefield.fields import PickledObjectField
 from preferences import app_settings
-import fields
+from preferences import fields
 
 
 PREFERENCES = {}
@@ -19,6 +21,7 @@ for app in settings.INSTALLED_APPS:
         pass
 
 
+@python_2_unicode_compatible
 class UserPreferences(models.Model):
     user = fields.AutoOneToOneField(
         app_settings.User,
@@ -33,7 +36,7 @@ class UserPreferences(models.Model):
         verbose_name = _(u'User Preferences')
         verbose_name_plural = _(u'User Preferences')
 
-    def __unicode__(self):
+    def __str__(self):
         return _(u'Preferences for user %s') % self.user.username
 
     def __setitem__(self, key, item):

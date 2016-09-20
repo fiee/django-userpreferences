@@ -4,7 +4,7 @@ from setuptools import setup, find_packages
 
 METADATA = dict(
     name='django-userpreferences',
-    version='0.1.3',
+    version='0.1.4',
     author='Nicolas Patry et al.',
     author_email='nicolas.patry@centraliens.net',
 
@@ -21,7 +21,7 @@ METADATA = dict(
 
     keywords='django preferences user settings profile',
 
-    install_requires=['django>=1.7', 'django_picklefield>=0.1.9', ],
+    install_requires=['django>=1.8', 'django_picklefield>=0.1.9', ],
     packages=find_packages(),
 
     classifiers=[
