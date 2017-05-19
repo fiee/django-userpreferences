@@ -1,10 +1,3 @@
-"""
-This file demonstrates two different styles of tests (one doctest and one
-unittest). These will both pass when you run "manage.py test".
-
-Replace these with more appropriate tests for your application.
-"""
-
 from django.test import TestCase
 from preferences import models
 from django.contrib.auth.models import User
@@ -28,7 +21,8 @@ class PreferencesTest(TestCase):
             }
         self.u.preferences.preferences['test_app'] = {
             'pref_test': 'default_value',
-            'pref_test2': 'default_value2',}
+            'pref_test2': 'default_value2',
+        }
 
     def tearDown(self):
         models.PREFERENCES = self.OLD_PREFERENCES
