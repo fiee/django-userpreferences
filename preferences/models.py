@@ -1,4 +1,5 @@
 from __future__ import absolute_import
+from __future__ import unicode_literals
 from django.conf import settings
 from django.contrib.auth import models as auth_models
 from django.utils.translation import ugettext as _
@@ -25,19 +26,19 @@ for app in settings.INSTALLED_APPS:
 class UserPreferences(models.Model):
     user = fields.AutoOneToOneField(
         app_settings.User,
-        verbose_name=_(u'User'),
+        verbose_name=_('User'),
         related_name='preferences',
         null=True)
     preferences = PickledObjectField(
-        verbose_name=_(u'Preferences'),
+        verbose_name=_('Preferences'),
         default={})
 
     class Meta(object):
-        verbose_name = _(u'User Preferences')
-        verbose_name_plural = _(u'User Preferences')
+        verbose_name = _('User Preferences')
+        verbose_name_plural = _('User Preferences')
 
     def __str__(self):
-        return _(u'Preferences for user %s') % self.user.username
+        return _('Preferences for user %s') % self.user.username
 
     def __setitem__(self, key, item):
         self.preferences[key] = item
@@ -65,7 +66,9 @@ class UserPreferences(models.Model):
         return prefs
 
     def all(self):
-        # reorders preferences to put current user preferences as first item
+        """
+        reorders preferences to put current user preferences as first item
+        """
         preferences = PREFERENCES
         for app_label in PREFERENCES:
             user_prefs = self.preferences.get(app_label)
