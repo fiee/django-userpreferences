@@ -20,12 +20,9 @@ Dependencies
 Installing django-userpreferences
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
 
-Install into your python path using pip or easy_install::
+Install into your python path using pip::
 
-    pip install django-userpreferences
-    easy_install django-userpreferences
-
-(Beware, this fork is only installable from github!)
+    pip install git+https://github.com/fiee/django-userpreferences.git
 
 Add *'preferences'* to your INSTALLED_APPS in settings.py::
 
@@ -127,5 +124,5 @@ django-picklefield_ is MIT-licensed. Django_ itself is BSD-licensed. Discuss.
 
 
 .. _Django: https://www.djangoproject.com/
-.. _django-picklefield: https://github.com/shrubberysoft/django-picklefield
+.. _django-picklefield: https://github.com/gintas/django-picklefield
 .. _pickle: http://docs.python.org/library/pickle.html
