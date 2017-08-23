@@ -12,10 +12,10 @@ PREFERENCES = {}
 
 for app in settings.INSTALLED_APPS:
     try:
-        _temp = __import__(app, globals(), locals(), ['preferences'], -1)
+        _temp = __import__(app, globals(), locals(), ['preferences'])
         prefs = _temp.preferences.PREFERENCES
         PREFERENCES.update({app: prefs})
-    except:
+    except (AttributeError, ImportError):
         pass
 
 
