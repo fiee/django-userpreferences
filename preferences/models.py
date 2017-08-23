@@ -1,10 +1,11 @@
+from __future__ import absolute_import, print_function, unicode_literals
+
 from django.conf import settings
-from django.contrib.auth import models as auth_models
 from django.db import models
 from picklefield.fields import PickledObjectField
 from preferences import app_settings
 
-import fields
+from . import fields
 
 
 PREFERENCES = {}
@@ -61,14 +62,10 @@ class UserPreferences(models.Model):
                 if pref in preferences[app_label]:
                     # Happens if old info is left in user settings
                     possibilities = list(preferences[app_label][pref])
-                    for index,item in enumerate(possibilities):
+                    for index, item in enumerate(possibilities):
                         if item[1] == user_value:
                             user_item = possibilities.pop(index)
                             possibilities.insert(0, user_item)
                             break
                     preferences[app_label][pref] = tuple(possibilities)
         return preferences
-
-
-
-

@@ -1,14 +1,16 @@
+from __future__ import absolute_import, print_function, unicode_literals
+
 import os
 
 from django.contrib.auth.decorators import login_required
+from django.core.urlresolvers import reverse
+from django.http import HttpResponseRedirect
+from django.http.response import HttpResponse
 from django.shortcuts import render_to_response
 from django.template import RequestContext
 import django.views.static
-from django.http import HttpResponseRedirect
-from django.core.urlresolvers import reverse
 
-import app_settings
-from django.http.response import HttpResponse
+from . import app_settings
 
 
 @login_required
@@ -28,23 +30,22 @@ def index(request):
             preferences = request.user.preferences.all()
             if preferences[app][pref][0][1] != value:
                 user_preferences = request.user.preferences.preferences
-                if not user_preferences.has_key(app):
+                if app not in user_preferences:
                     user_preferences[app] = {}
-                if not user_preferences[app].has_key(pref):
-                    user_preferences[app][pref]={}
-                user_preferences[app][pref]=value
+                if pref not in user_preferences[app]:
+                    user_preferences[app][pref] = {}
+                user_preferences[app][pref] = value
                 request.user.preferences.save()
-    preferences=request.user.preferences.all()
+    preferences = request.user.preferences.all()
     # TODO if django version is older
     static_url = reverse('preferences.views.media', args=[''])
     extra = {
-            'preferences': preferences,
-            'STATIC_URL': static_url,
-            "SEPARATOR": app_settings.SEPARATOR}
+        'preferences': preferences,
+        'STATIC_URL': static_url,
+        "SEPARATOR": app_settings.SEPARATOR,
+    }
     return render_to_response(
-            'preferences.html',
-            extra,
-            context_instance=RequestContext(request))
+        'preferences.html', extra, context_instance=RequestContext(request))
 
 
 def media(request, path):
@@ -70,4 +71,3 @@ def change(request, app, pref, new_value):
     request.user.preferences.preferences[app][pref] = new_value
     request.user.preferences.save()
     return HttpResponseRedirect(return_url)
-
