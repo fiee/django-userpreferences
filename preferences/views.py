@@ -1,14 +1,12 @@
+from __future__ import absolute_import, print_function, unicode_literals
 import os
-
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 import django.views.static
-# import app_settings
 from django.http import HttpResponseRedirect
 from django.core.urlresolvers import reverse
-
-import app_settings
 from django.http.response import HttpResponse
+from . import app_settings
 
 
 @login_required
@@ -40,7 +38,8 @@ def index(request):
     extra = {
             'preferences': preferences,
             'STATIC_URL': static_url,
-            "SEPARATOR": app_settings.SEPARATOR}
+            'SEPARATOR': app_settings.SEPARATOR
+    }
     return render(request, 'preferences.html', extra)
 
 

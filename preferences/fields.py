@@ -1,3 +1,5 @@
+from __future__ import absolute_import, print_function, unicode_literals
+
 from django.db.models import OneToOneField
 from django.db.models.fields.related_descriptors import ReverseOneToOneDescriptor
 # before Django 1.8 this was SingleRelatedObjectDescriptor from ...fields.related
