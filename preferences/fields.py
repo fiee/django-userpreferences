@@ -1,11 +1,15 @@
 from __future__ import absolute_import, print_function, unicode_literals
 
 from django.db.models import OneToOneField
-from django.db.models.fields.related_descriptors import ReverseOneToOneDescriptor
-# before Django 1.8 this was SingleRelatedObjectDescriptor from ...fields.related
+try:
+    from django.db.models.fields.related import (
+        ReverseOneToOneDescriptor as SingleRelatedObjectDescriptor
+    )
+except ImportError:  # django < 1.9
+    from django.db.models.fields.related_descriptors import SingleRelatedObjectDescriptor
 
 
-class AutoSingleRelatedObjectDescriptor(ReverseOneToOneDescriptor):
+class AutoSingleRelatedObjectDescriptor(SingleRelatedObjectDescriptor):
     def __get__(self, instance, instance_type=None):
         try:
             return super(AutoSingleRelatedObjectDescriptor, self).__get__(instance, instance_type)
