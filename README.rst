@@ -7,13 +7,13 @@ Save arbitrary settings per user.
 This pluggable Django_ app should integrate easily with other apps, also in existing projects.
 
 
-Installation 
+Installation
 ============
 
-Dependencies  
+Dependencies
 ~~~~~~~~~~~~
 
-* Django_ (of course)
+* Django_ (of course) 2.2+
 * django-picklefield_
 
 
@@ -31,11 +31,11 @@ Add *'preferences'* to your INSTALLED_APPS in settings.py::
         'preferences',
     )
 
-Add *'(r'^preferences/', include('preferences.urls')'* to your urls:: 
+Add *'('preferences', include('preferences.urls'))'* to your urls::
 
     urlpatterns = [
         ....
-        url(r'^preferences/', include('preferences.urls'),
+        path('preferences', include('preferences.urls')),
     ]
 
 Don't forget to run ::
@@ -60,10 +60,10 @@ That looks like this::
 
     PREFERENCES = (
         'mailing_period':(
-            # (u'Preference Display', 'value')
-            (u'Weekly', 'week'),  # first item is the default value
-            (u'Monthly', 'month'),
-            (u'Daily', 'day'),
+            # ('Preference Display', 'value')
+            ('Weekly', 'week'),  # first item is the default value
+            ('Monthly', 'month'),
+            ('Daily', 'day'),
         )
     )
 
@@ -83,20 +83,20 @@ It's a Model object; dict behaviour is a shortcut for ``user.preferences.prefere
 If you use the preferences urls, there’s an url to change preferences::
 
     <a href="{% url preferences.views.change 'test_app' 'mailing_period' 'month' %}?return_url='/'>Receive monthly newsletter</a>
-        
-If the value in the database does not match any of the preferences in your 
-``preferences.py``, the default value will be returned (this allows to disable 
+
+If the value in the database does not match any of the preferences in your
+``preferences.py``, the default value will be returned (this allows to disable
 preferences after people actually used them, without breaking your app).
 
 Since we use pickle_ serialization, you can use only pickle-able settings.
 These include strings, integers, floats, booleans, tuples, lists, sets.
 
-Only discrete sets of settings are allowed for now.
+*Only discrete sets of settings are allowed* for now.
 Patches are welcome for preferences that accept user input.
 
-Changing the default separator 
+Changing the default separator
 ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
- 
+
 django-userpreferences uses a separator between app name and
 preference name in forms. By default the separator is '/'. To override this,
 in the weird case you might be needing it in some variable name, you need
@@ -111,7 +111,7 @@ Authors
 ~~~~~~~
 
 * Nicolas Patry, <nicolas.patry@centraliens.net> (first author)
-* Henning Hraban Ramm, <hraban@fiee.net> (i18n, fixes)
+* Henning Hraban Ramm, <hraban@fiee.net> (i18n, fixes, adaption to Django 2+)
 * Gonzalo Delgado, <mail@gonzalodelgado.com.ar> (form)
 * Andrei Kuziakov (adaption to Django 1.7, tests,  migration)
 

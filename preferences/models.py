@@ -1,10 +1,6 @@
-from __future__ import absolute_import
-from __future__ import print_function
-from __future__ import unicode_literals
 from django.conf import settings
 from django.contrib.auth import models as auth_models
 from django.utils.translation import ugettext as _
-from django.utils.encoding import python_2_unicode_compatible
 from django.db import models
 from picklefield.fields import PickledObjectField
 from preferences import app_settings
@@ -23,7 +19,6 @@ for app in settings.INSTALLED_APPS:
         pass
 
 
-@python_2_unicode_compatible
 class UserPreferences(models.Model):
     user = fields.AutoOneToOneField(
         app_settings.User,

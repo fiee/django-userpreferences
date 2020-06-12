@@ -1,5 +1,3 @@
-from __future__ import absolute_import, print_function, unicode_literals
-import os
 from django.contrib.auth.decorators import login_required
 from django.shortcuts import render
 import django.views.static
@@ -33,7 +31,6 @@ def index(request):
                 user_preferences[app][pref] = value
                 request.user.preferences.save()
     preferences = request.user.preferences.all()
-    # TODO if django version is older
     static_url = reverse('preferences.views.media', args=[''])
     extra = {
             'preferences': preferences,
@@ -41,17 +38,6 @@ def index(request):
             'SEPARATOR': app_settings.SEPARATOR
     }
     return render(request, 'preferences.html', extra)
-
-
-def media(request, path):
-    """
-    Serve media file directly.
-    Useful only for django pre 1.3 which does not use
-    django.collectstatic
-    """
-    parent = os.path.abspath(os.path.dirname(__file__))
-    root = os.path.join(parent, 'media')
-    return django.views.static.serve(request, path, root)
 
 
 @login_required
