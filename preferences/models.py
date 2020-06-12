@@ -22,12 +22,13 @@ for app in settings.INSTALLED_APPS:
 class UserPreferences(models.Model):
     user = fields.AutoOneToOneField(
         app_settings.User,
+        on_delete=models.CASCADE,
         verbose_name=_('User'),
         related_name='preferences',
         null=True)
     preferences = PickledObjectField(
         verbose_name=_('Preferences'),
-        default={})
+        default=dict)
 
     class Meta(object):
         verbose_name = _('User Preferences')
