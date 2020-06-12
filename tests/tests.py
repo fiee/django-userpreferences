@@ -2,7 +2,7 @@ from django.test import TestCase
 from preferences import models
 from django.contrib.auth.models import User
 from django.test.client import Client
-from django.core.urlresolvers import reverse
+from django.urls import reverse
 
 
 class PreferencesTest(TestCase):

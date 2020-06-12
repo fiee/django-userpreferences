@@ -1,5 +1,4 @@
 import os
-from django.core.wsgi import get_wsgi_application
 
 
 BASE_DIR = os.path.dirname(__file__)
@@ -51,8 +50,4 @@ TEMPLATES = [
     },
 ]
 
-
 SECRET_KEY = 'testsecretkey'
-
-os.environ['DJANGO_SETTINGS_MODULE'] = 'test_settings'
-application = get_wsgi_application()
